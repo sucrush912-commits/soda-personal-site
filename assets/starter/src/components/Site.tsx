@@ -43,7 +43,7 @@ export function Site({ view = 'home', slug = '' }: { view?: string; slug?: strin
     try { localStorage.setItem('personal-theme', next ? 'night' : 'light'); } catch { /* Optional persistence. */ }
     window.dispatchEvent(new Event('personal-preferences'));
   }
-  const showProjects = activeRooms.some(r => r.id === 'artifact');
+  const showProjects = site.projects.length > 0;
   const showWriting = activeArticles.length > 0;
 
   return <div className="site" data-lang={lang} style={{ '--accent': site.accent } as CSSProperties}>
@@ -71,17 +71,17 @@ export function Site({ view = 'home', slug = '' }: { view?: string; slug?: strin
             <h1>{lang === 'zh' ? site.name : site.nameEn}<span className="hero-star" aria-hidden="true">✦</span></h1>
             <p className="hero-tagline">{t(site.tagline, lang)}</p>
             <p className="muted">{t(site.intro, lang)}</p>
-            <div className="hero-tags">{site.roles.map((r, i) => <span key={i}>{t(r, lang)}</span>)}<Link href={showProjects ? '#building' : '#about'}>{label('向内探索', 'Explore the archive')} ↗</Link></div>
+            <div className="hero-tags">{site.roles.map((r, i) => <span key={i}>{t(r, lang)}</span>)}<Link href={showProjects ? '#building' : '#about'}>{showProjects ? label('查看我的作品', 'Explore my work') : label('认识我', 'About me')} ↗</Link></div>
           </div>
           <figure className="hero-art">
             {site.portrait ? <Image src={site.portrait} alt={t(site.portraitAlt, lang)} fill sizes="(max-width: 700px) 90vw, 42vw" priority /> : <div className="orbit-art" role="img" aria-label={label('代表探索与成长的抽象轨道', 'Abstract orbits representing growth and exploration')}><i /><i /><i /><span>✦</span><small>IDEAS INTO ORBIT</small></div>}
-            <figcaption>{label('一个持续生长的小宇宙', 'A small universe, always growing')}</figcaption>
+            <figcaption>{label('记录思考，也记录创造', 'Notes on thinking and making')}</figcaption>
           </figure>
           <div className="hero-foot"><span>{site.nameEn} / PERSONAL FIELD NOTES</span><span>SCROLL TO EXPLORE ↓</span></div>
         </section>
-        <section className="section about" id="about">
-          <div><Heading kicker="01 / THE PERSON BEHIND THE WORK" title={label('我是谁，正在成为谁。', 'The person behind the work.')} /><p className="about-text">{t(site.about, lang)}</p></div>
-          <div className="room-grid">{activeRooms.map(r => <Link className="room-gate" href={`/universe/${r.id}`} key={r.id}><span className="room-letter">{r.letter}</span><div><h3>{t(r.title, lang)} <span aria-hidden="true">↗</span></h3><p>{t(r.description, lang)}</p></div></Link>)}</div>
+        <section className={`section about${activeRooms.length ? '' : ' about--intro'}`} id="about">
+          <div><Heading kicker="01 / THE PERSON BEHIND THE WORK" title={label('关于我', 'About me')} /><p className="about-text">{t(site.about, lang)}</p></div>
+          {activeRooms.length > 0 && <div className="room-grid">{activeRooms.map(r => <Link className="room-gate" href={`/universe/${r.id}`} key={r.id}>{r.letter && <span className="room-letter">{r.letter}</span>}<div><h3>{t(r.title, lang)} <span aria-hidden="true">↗</span></h3><p>{t(r.description, lang)}</p></div></Link>)}</div>}
         </section>
         {showProjects && <section className="section" id="building"><Heading kicker="02 / IDEAS MADE TANGIBLE" title={label('正在创造', 'What I am making')} link="/works" more={label('查看全部作品', 'All projects')} /><Projects lang={lang} /></section>}
         {showWriting && <section className="section"><Heading kicker="03 / THINKING IN PUBLIC" title={label('表达与实践', 'Thoughts & practice')} link="/writing" more={label('进入文字档案', 'Browse the archive')} /><ArticleList entries={activeArticles.slice(0, 3)} lang={lang} open={setSelected} /></section>}
@@ -90,7 +90,7 @@ export function Site({ view = 'home', slug = '' }: { view?: string; slug?: strin
         <Link className="back" href="/">← {label('回到首页', 'Back home')}</Link>
         <Heading primary kicker={room ? `${room.letter} / PERSONAL UNIVERSE` : 'THE ARCHIVE'} title={view === 'article' && entry ? t(entry.title, lang) : room ? t(room.title, lang) : view === 'works' ? label('作品与项目', 'Works & projects') : label('文字档案', 'Writing archive')} />
         {room && <p className="archive-intro">{t(room.description, lang)}</p>}
-        <nav className="room-nav" aria-label={label('档案房间', 'Archive rooms')}>{activeRooms.map(r => <Link href={`/universe/${r.id}`} aria-current={view === r.id ? 'page' : undefined} key={r.id}>{r.letter} · {t(r.title, lang)}</Link>)}</nav>
+        {activeRooms.length > 0 && <nav className="room-nav" aria-label={label('档案房间', 'Archive rooms')}>{activeRooms.map(r => <Link href={`/universe/${r.id}`} aria-current={view === r.id ? 'page' : undefined} key={r.id}>{r.letter ? `${r.letter} · ` : ''}{t(r.title, lang)}</Link>)}</nav>}
         {(view === 'works' || view === 'artifact') && <Projects lang={lang} />}
         {view === 'story' && <div className="story-list">{site.chapters.map((c, i) => <section key={i}><p className="eyebrow">{c.period}</p><h2>{t(c.title, lang)}</h2><p>{t(c.body, lang)}</p></section>)}{site.chapters.length === 0 && <Empty lang={lang} />}</div>}
         {['writing', 'orbit', 'digest'].includes(view) && <><div className="filters" role="group" aria-label={label('按主题筛选', 'Filter by topic')}><button type="button" aria-pressed={filter === 'all'} onClick={() => setFilter('all')}>{label('全部', 'All')}</button>{categories.map(c => <button key={c} type="button" aria-pressed={filter === c} onClick={() => setFilter(c)}>{c}</button>)}</div><ArticleList entries={articles} lang={lang} open={setSelected} /></>}
@@ -126,5 +126,5 @@ function Reader({ entry, lang, close }: { entry: Entry; lang: Lang; close: () =>
     node?.showModal(); document.body.style.overflow = 'hidden';
     return () => { node?.close(); document.body.style.overflow = previousOverflow; previousFocus?.focus(); };
   }, []);
-  return <dialog ref={dialog} className={`reader ${expanded ? 'expanded' : ''}`} aria-labelledby="reader-title" onCancel={e => { e.preventDefault(); close(); }} onClick={e => { if (e.target === e.currentTarget) close(); }}><div className="reader-inner"><header><span>PERSONAL NOTE / {entry.room.toUpperCase()}</span><div><button type="button" onClick={() => setExpanded(!expanded)} aria-label={pick(lang, expanded ? '退出全屏阅读' : '展开全屏阅读', expanded ? 'Exit full-screen reading' : 'Expand reading')}>{expanded ? '↙' : '↗'}</button><button type="button" autoFocus onClick={close} aria-label={pick(lang, '关闭文章', 'Close article')}>×</button></div></header><div className="reader-scroll"><article className="reading"><h1 id="reader-title">{t(entry.title, lang)}</h1><p className="deck">{t(entry.summary, lang)}</p><ArticleBody entry={entry} lang={lang} /><Link href={`/writing/${entry.slug}`}>{pick(lang, '独立文章链接', 'Article permalink')} ↗</Link></article></div></div></dialog>;
+  return <dialog ref={dialog} className={`reader ${expanded ? 'expanded' : ''}`} aria-labelledby="reader-title" onCancel={e => { e.preventDefault(); close(); }} onClick={e => { if (e.target === e.currentTarget) close(); }}><div className="reader-inner"><header><span>PERSONAL NOTE / {t(entry.category, lang)}</span><div><button type="button" onClick={() => setExpanded(!expanded)} aria-label={pick(lang, expanded ? '退出全屏阅读' : '展开全屏阅读', expanded ? 'Exit full-screen reading' : 'Expand reading')}>{expanded ? '↙' : '↗'}</button><button type="button" autoFocus onClick={close} aria-label={pick(lang, '关闭文章', 'Close article')}>×</button></div></header><div className="reader-scroll"><article className="reading"><h1 id="reader-title">{t(entry.title, lang)}</h1><p className="deck">{t(entry.summary, lang)}</p><ArticleBody entry={entry} lang={lang} /><Link href={`/writing/${entry.slug}`}>{pick(lang, '独立文章链接', 'Article permalink')} ↗</Link></article></div></div></dialog>;
 }

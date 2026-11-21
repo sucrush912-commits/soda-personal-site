@@ -15,15 +15,8 @@
   "portraitAlt": { "zh": "个人肖像", "en": "Personal portrait" },
   "email": "",
   "socials": [],
-  "rooms": [
-    { "id": "story", "letter": "S", "title": { "zh": "来时路", "en": "Story" }, "description": { "zh": "经历怎样塑造了今天的我", "en": "The experiences that shaped me" }, "enabled": true },
-    { "id": "orbit", "letter": "O", "title": { "zh": "思考轨道", "en": "Orbit" }, "description": { "zh": "那些值得反复追问的问题", "en": "Questions I keep returning to" }, "enabled": true },
-    { "id": "digest", "letter": "D", "title": { "zh": "实践沉淀", "en": "Digest" }, "description": { "zh": "从实践里长出来的方法", "en": "Methods learned through practice" }, "enabled": true },
-    { "id": "artifact", "letter": "A", "title": { "zh": "创造物", "en": "Artifact" }, "description": { "zh": "让想法落地的作品与实验", "en": "Ideas made tangible" }, "enabled": true }
-  ],
-  "chapters": [
-    { "period": "01 / EXPLORING", "title": { "zh": "示例：从一次好奇开始", "en": "Sample: A small beginning" }, "body": { "zh": "这里适合写一个真实的转折：当时遇到了什么，做了什么选择，它如何影响你现在的方向。不必把每段经历都写成成功故事。", "en": "Describe a real turning point: what happened, the choice you made, and how it influenced your direction. Not every experience needs to be a success story." } }
-  ],
+  "rooms": [],
+  "chapters": [],
   "projects": [
     { "id": "field-notes", "title": { "zh": "示例：城市观察手记", "en": "Sample: Field Notes" }, "summary": { "zh": "把零散观察整理成可持续更新的小型档案。", "en": "A growing archive of everyday observations." }, "audience": { "zh": "同样喜欢观察日常的人", "en": "People curious about everyday life" }, "evidence": { "zh": "替换为你的截图、演示或可访问的真实成果。", "en": "Replace with a screenshot, demo, or real outcome." }, "status": { "zh": "示例项目", "en": "Sample project" }, "url": "", "image": "" }
   ],

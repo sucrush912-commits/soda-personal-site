@@ -44,7 +44,7 @@ export function validateProfile(p) {
   list(p.roles, 'roles', 8); p.roles.forEach((x) => translated(x, 'roles'));
   list(p.socials, 'socials', 20); p.socials.forEach((x) => { text(x.label, 'social label', 80); link(x.url, 'social URL'); if (!x.url) fail('social URL 不能为空'); });
   list(p.rooms, 'rooms', 4);
-  if (p.rooms.length !== 4 || new Set(p.rooms.map(x => x.id)).size !== 4) fail('rooms 需要四个不同房间；不需要的房间设置 enabled=false');
+  if (new Set(p.rooms.map(x => x.id)).size !== p.rooms.length) fail('rooms 的 id 不能重复；不需要独立档案时使用空数组');
   p.rooms.forEach((r) => {
     if (!['story', 'orbit', 'digest', 'artifact'].includes(r.id) || typeof r.enabled !== 'boolean') fail('房间 id 或 enabled 无效');
     text(r.letter, 'room letter', 2); translated(r.title, 'room title'); translated(r.description, 'room description');

@@ -1,4 +1,4 @@
 interface:
   display_name: "soda-personal-site"
-  short_description: "用自己的经历、思考与作品，搭建有 SODA 气质的个人档案网站"
+  short_description: "用自己的介绍、作品和文章，搭建暖纸面风格的个人品牌网站"
   default_prompt: "请用 $soda-personal-site，根据我愿意公开的真实资料搭建个人网站，并验证桌面与手机体验。"

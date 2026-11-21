@@ -18,7 +18,8 @@ export const site = profile as SiteProfile;
 export const t = (copy: Copy, lang: Lang) => copy[lang] || copy[site.defaultLang as Lang];
 export const pick = (lang: Lang, zh: string, en: string) => lang === 'zh' ? zh : en;
 export const activeRooms = site.rooms.filter(room => room.enabled);
-export const activeArticles = site.articles.filter(article => activeRooms.some(room => room.id === article.room));
+// 普通文章独立于可选档案。只有显式禁用的档案才隐藏其关联内容。
+export const activeArticles = site.articles.filter(article => !site.rooms.some(room => room.id === article.room && !room.enabled));
 export function metadataFor(title: string, description: string, route: string): Metadata {
   const url = site.siteUrl ? site.siteUrl.replace(/\/$/, '') + route : undefined;
   return {

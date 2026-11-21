@@ -10,6 +10,23 @@ const root = fileURLToPath(new URL('../', import.meta.url));
 const run = (...args) => spawnSync(process.execPath, [path.join(root, 'scripts/create-site.mjs'), ...args], { encoding: 'utf8' });
 const example = () => readFile(path.join(root, 'assets/starter/site.config.json'), 'utf8').then(JSON.parse);
 
+test('default profile does not impose the source author’s four branded rooms', async () => {
+  const profile = await example();
+  assert.deepEqual(profile.rooms, []);
+  assert.ok(profile.projects.length > 0);
+  assert.ok(profile.articles.length > 0);
+});
+
+test('supports one optional archive without requiring four rooms', async () => {
+  const temp = await mkdtemp(path.join(tmpdir(), 'soda-site-one-room-'));
+  const profile = await example();
+  profile.rooms = [{ id: 'story', letter: '', title: { zh: '经历', en: 'Experience' }, description: { zh: '我的经历', en: 'My experience' }, enabled: true }];
+  const input = path.join(temp, 'profile.json');
+  await writeFile(input, JSON.stringify(profile));
+  const result = run('--profile', input, '--output', path.join(temp, 'site'));
+  assert.equal(result.status, 0, result.stderr);
+});
+
 test('creates a standalone site from a profile in a new directory', async () => {
   const temp = await mkdtemp(path.join(tmpdir(), 'soda-site-test-'));
   const profile = await example();
