@@ -1,0 +1,34 @@
+{
+  "name": "林间",
+  "nameEn": "LIN JIAN",
+  "initials": "LJ",
+  "defaultLang": "zh",
+  "demo": true,
+  "publish": false,
+  "siteUrl": "",
+  "accent": "#d84a1a",
+  "tagline": { "zh": "把好奇心，变成真实的作品。", "en": "Turning curiosity into things that exist." },
+  "intro": { "zh": "这是一个示例个人档案。用真实经历、持续思考和正在做的事，介绍你自己。", "en": "A sample personal archive. Introduce yourself through real experiences, ongoing ideas, and work in progress." },
+  "roles": [{ "zh": "独立创造者", "en": "Independent creator" }, { "zh": "持续学习", "en": "Always learning" }],
+  "about": { "zh": "比起一份固定的自我介绍，我更想留下一个持续更新的档案：走过什么路，为什么这样想，如何做事，又创造了什么。以下内容均为演示，请换成自己的真实材料。", "en": "Rather than a fixed introduction, I keep a growing archive: where I have been, what I believe, how I work, and what I make. All content below is illustrative; replace it with your own." },
+  "portrait": "",
+  "portraitAlt": { "zh": "个人肖像", "en": "Personal portrait" },
+  "email": "",
+  "socials": [],
+  "rooms": [
+    { "id": "story", "letter": "S", "title": { "zh": "来时路", "en": "Story" }, "description": { "zh": "经历怎样塑造了今天的我", "en": "The experiences that shaped me" }, "enabled": true },
+    { "id": "orbit", "letter": "O", "title": { "zh": "思考轨道", "en": "Orbit" }, "description": { "zh": "那些值得反复追问的问题", "en": "Questions I keep returning to" }, "enabled": true },
+    { "id": "digest", "letter": "D", "title": { "zh": "实践沉淀", "en": "Digest" }, "description": { "zh": "从实践里长出来的方法", "en": "Methods learned through practice" }, "enabled": true },
+    { "id": "artifact", "letter": "A", "title": { "zh": "创造物", "en": "Artifact" }, "description": { "zh": "让想法落地的作品与实验", "en": "Ideas made tangible" }, "enabled": true }
+  ],
+  "chapters": [
+    { "period": "01 / EXPLORING", "title": { "zh": "示例：从一次好奇开始", "en": "Sample: A small beginning" }, "body": { "zh": "这里适合写一个真实的转折：当时遇到了什么，做了什么选择，它如何影响你现在的方向。不必把每段经历都写成成功故事。", "en": "Describe a real turning point: what happened, the choice you made, and how it influenced your direction. Not every experience needs to be a success story." } }
+  ],
+  "projects": [
+    { "id": "field-notes", "title": { "zh": "示例：城市观察手记", "en": "Sample: Field Notes" }, "summary": { "zh": "把零散观察整理成可持续更新的小型档案。", "en": "A growing archive of everyday observations." }, "audience": { "zh": "同样喜欢观察日常的人", "en": "People curious about everyday life" }, "evidence": { "zh": "替换为你的截图、演示或可访问的真实成果。", "en": "Replace with a screenshot, demo, or real outcome." }, "status": { "zh": "示例项目", "en": "Sample project" }, "url": "", "image": "" }
+  ],
+  "articles": [
+    { "slug": "a-question-worth-keeping", "room": "orbit", "category": { "zh": "观察", "en": "Observation" }, "title": { "zh": "示例：留下一个值得追问的问题", "en": "Sample: A question worth keeping" }, "summary": { "zh": "观点不必一次定型，可以保留它变化的过程。", "en": "An idea can remain open to revision." }, "sections": [ { "heading": { "zh": "从具体情境开始", "en": "Start with a situation" }, "paragraphs": [ { "zh": "这是阅读体验的示例文字。把你真正遇到的情境、当时的判断和后来改变的看法放在这里。不要用 AI 编造的人生经历代替自己的材料。", "en": "This is sample text for the reading experience. Replace it with a real situation, your judgment at the time, and what changed later." } ] } ] },
+    { "slug": "one-small-experiment", "room": "digest", "category": { "zh": "实践", "en": "Practice" }, "title": { "zh": "示例：用一个小实验验证想法", "en": "Sample: One small experiment" }, "summary": { "zh": "写清做法、结果，以及下一次会怎样调整。", "en": "Record the action, the result, and the next adjustment." }, "sections": [ { "heading": { "zh": "留下可以复用的步骤", "en": "Keep the steps" }, "paragraphs": [ { "zh": "这是方法文章的示例。讲清你在什么条件下尝试了什么、观察到了什么，以及哪些条件下这套做法不适用。", "en": "This is a sample method note. Explain the context, the action, what you observed, and when the method does not apply." } ] } ] }
+  ]
+}
